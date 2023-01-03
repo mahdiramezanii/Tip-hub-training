@@ -1,0 +1,132 @@
+{% load static %}
+<div class="header header-light head-shadow">
+    <div class="container">
+        <nav id="navigation" class="navigation navigation-landscape">
+            <div class="nav-header">
+                <a class="nav-brand" href="#">
+                    <img src="{% static "assets/img/logo_c.jpg" %}" style="width: 80px" class="logo" alt=""/>
+                </a>
+                <div class="nav-toggle"></div>
+                <div class="mobile_nav">
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0);" data-toggle="modal" data-target="#login"
+                               class="crs_yuo12 w-auto text-white theme-bg">
+                                <span class="embos_45"><i class="fas fa-sign-in-alt ml-1 rotate-img"></i>ورود</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="nav-menus-wrapper">
+                <ul class="nav-menu">
+
+                    <li {% if request.resolver_match.url_name == "Home" %} class="active" {% endif %}><a
+                            href="">خانه<span class="submenu-indicator"></span></a>
+
+                    </li>
+
+                    <li><a href="#">دسته بندی ها<span class="submenu-indicator"></span></a>
+                        <ul class="nav-dropdown nav-submenu">
+
+
+                            {% for iten in category %}
+                            <li><a href="about.html">{{ iten.name }}</a></li>
+
+                            {% endfor %}
+
+                        </ul>
+                    </li>
+
+                    <li {% if request.resolver_match.url_name == "Course" %} class="active" {% endif %}><a
+                            href="">دوره های آموزشی<span class="submenu-indicator"></span></a>
+
+                    </li>
+
+                    <li {% if request.resolver_match.url_name == "Teacher_List" %} class="active" {% endif %}><a
+                            href="}">مدرسین<span
+                            class="submenu-indicator"></span></a>
+
+                    </li>
+
+                    <li {% if request.resolver_match.url_name == "technical_team" %} class="active" {% endif %}><a
+                            href="">تیم فنی<span
+                            class="submenu-indicator"></span></a>
+
+                    </li>
+
+
+                    <li {% if request.resolver_match.url_name == "blog" %} class="active" {% endif %}><a
+                            href="">وبلاگ</a></li>
+
+                    <li {% if request.resolver_match.url_name == "about_us" %} class="active" {% endif %}><a
+                            href="">درباره ما</a></li>
+
+                    <li {% if request.resolver_match.url_name == "about_usl" %} class="active" {% endif %}><a
+                            href="">معرفی انجمن</a></li>
+
+                </ul>
+
+                {% if request.user.is_authenticated %}
+
+
+                    <ul class="nav-menu nav-menu-social align-to-left">
+
+                        <div class="btn-group account-drop">
+                            <a href="javascript:void(0);" class="crs_yuo12 btn btn-order-by-filt" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+
+                                {% if request.user.image %}
+                                    <img src="{{ request.user.image.url }}" class="avater-img" alt="">
+                                {% else %}
+                                    <img src="{% static "assets/img/user-5.jpg" %}" class="avater-img" alt="">
+                                {% endif %}
+                            </a>
+                            <div class="dropdown-menu pull-right animated flipInX">
+
+                                {% if request.user.is_authenticated %}
+
+                                    <div class="drp_menu_headr">
+                                        <h4>سلام،{{ request.user.full_name }}</h4>
+                                    </div>
+
+                                {% endif %}
+                                <ul>
+
+                                    <li><a href=""><i class="fa fa-user-tie"></i>پروفایل
+                                        کاربری</a></li>
+                                    <li><a href=""><i class="fas fa-shopping-basket"></i>دوره های
+                                        من<span class="notti_coun style-2">{{ c_count }}</span></a></li>
+
+
+                                    <li><a href="messages.html"><i class="fas fa-comments"></i>پیام ها</a></li>
+                                    <li><a href=""><i class="fa fa-unlock-alt"></i>خروج</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                        </li>
+
+                    </ul>
+
+                {% else %}
+
+                    <ul class="nav-menu nav-menu-social align-to-left">
+
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#login">
+                                <i class="fas fa-sign-in-alt ml-1 rotate-img"></i><span class="dn-lg">ورود</span>
+                            </a>
+                        </li>
+                        <li class="add-listing theme-bg">
+                            <a href="" class="text-white">ثبت نام</a>
+                        </li>
+                    </ul>
+                {% endif %}
+
+            </div>
+        </nav>
+    </div>
+</div>
