@@ -1,0 +1,152 @@
+{% load static %}
+
+
+<div class="col-lg-3 col-md-3">
+    <div class="dashboard-navbar">
+
+        <div class="d-user-avater">
+            <img src="{{ request.user.image.url }}" class="img-fluid avater" alt="">
+            <h4>{{ request.user.full_name }}</h4>
+            <span>برنامه نویس ارشد</span>
+            <div class="elso_syu89">
+                <ul>
+                    <li><a href="#"><i class="ti-facebook"></i></a></li>
+                    <li><a href="#"><i class="ti-twitter"></i></a></li>
+                    <li><a href="#"><i class="ti-instagram"></i></a></li>
+                    <li><a href="#"><i class="ti-linkedin"></i></a></li>
+                </ul>
+            </div>
+            <div class="elso_syu77">
+                <div class="one_third">
+                    <div class="one_45ic text-warning bg-light-warning"><i class="fas fa-star"></i></div>
+                    <span>امتیازات</span></div>
+                <div class="one_third">
+                    <div class="one_45ic text-success bg-light-success"><i class="fas fa-file-invoice"></i></div>
+                    <span>دوره ها</span></div>
+                <div class="one_third">
+                    <div class="one_45ic text-purple bg-light-purple"><i class="fas fa-user"></i></div>
+                    <span>هنرجویان</span></div>
+            </div>
+        </div>
+
+        <div class="d-navigation">
+            <ul id="side-menu">
+                <li class="active"><a href="{% url "AdminPanel:Dashboard" %}"><i class="fas fa-th"></i>پیشخوان</a></li>
+
+                {% if request.user.is_teacher == True or request.user.is_admin == True %}
+
+                    <li class="dropdown">
+                        <a href="javascript:void(0);"><i class="fas fa-shopping-basket"></i>دوره های آموزش<span
+                                class="ti-angle-left"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="{% url "AdminPanel:Course_list" %}">لیست دوره ها</a></li>
+                            <li><a href="{% url "AdminPanel:Add_course" %}">افزودن دوره جدید</a></li>
+                            <li><a href="{% url "AdminPanel:CertificatesOfCourses" %}">صدور مدرک</a></li>
+
+                            {% if request.user.is_admin == True %}
+
+                                <li><a href="{% url "AdminPanel:Category_course" %}">دسته بندی دوره</a></li>
+                                <li><a href="{% url "AdminPanel:Coupons" %}">تخفیفات</a></li>
+
+                            {% endif %}
+                        </ul>
+                    </li>
+                {% endif %}
+
+
+                {% if request.user.is_blogger == True %}
+
+                    <li class="dropdown">
+                        <a href="javascript:void(0);"><i class="fas fa-shopping-basket"></i>وبلاگ<span
+                                class="ti-angle-left"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="{% url "AdminPanel:blog_list" %}">لیست مقاله ها</a></li>
+                            <li><a href="{% url "AdminPanel:create_blog" %}">افزودن مقاله</a></li>
+
+                        </ul>
+                    </li>
+
+                {% endif %}
+
+
+                {% if request.user.is_admin == True %}
+                    <li class="dropdown">
+                        <a href="javascript:void(0);"><i class="fas fa-gem"></i>ثبت نام ها<span
+                                class="ti-angle-left"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="enroll-history.html">تاریخچه</a></li>
+                            <li><a href="{% url "AdminPanel:Register_student" %}">ثبت نام هنرجو</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="javascript:void(0);"><i class="fas fa-archive"></i>گزارشات<span
+                                class="ti-angle-left"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="admin-revenue.html">درآمد ادمین</a></li>
+                            <li><a href="instructor-revenue.html">درآمد مربی</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0);"><i class="fas fa-user-shield"></i>مدیرها<span
+                                class="ti-angle-left"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="{% url "AdminPanel:Admin_list" %}">لیست مدیرها</a></li>
+                            <li><a href="{% url "AdminPanel:Add_admin" %}">افزودن مدیر جدید</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0);"><i class="fas fa-toolbox"></i>مدرسین<span
+                                class="ti-angle-left"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="{% url "AdminPanel:Teacher_list" %}">لیست مدرس</a></li>
+                            <li><a href="#">لیست پرداخت ها</a></li>
+                        </ul>
+                    </li>
+
+                {% endif %}
+
+
+                <li class="dropdown">
+                    <a href="javascript:void(0);"><i class="fas fa-toolbox"></i>درخواست های عضویت در کادر<span
+                            class="ti-angle-left"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="{% url "AdminPanel:Request_Teacher" %}">درخواست مدرس شدن</a></li>
+                        <li><a href="{% url "AdminPanel:requests" %}">درخواست عضویت در کادر فنی</a></li>
+                        {% if request.user.is_admin == True %}
+                            <li><a href="{% url "AdminPanel:request_list" %}">لیست در خواست ها</a></li>
+                        {% endif %}
+
+
+                    </ul>
+                </li>
+
+
+                {% if request.user.is_admin == True %}
+                    <li class="dropdown">
+                        <a href="javascript:void(0);"><i class="fas fa-user"></i>هنرجویان<span
+                                class="ti-angle-left"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="{% url "AdminPanel:Student_list" %}">لیست هنرجویان</a></li>
+                            <li><a href="{% url "AdminPanel:Add_student" %}">ثبت هنرجو جدید</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
+
+                <li><a href="messages.html"><i class="fas fa-comments"></i>پیام ها</a></li>
+                <li><a href="{% url "AdminPanel:Userpanel" %}"><i class="fas fa-address-card"></i>پروفایل کاربری</a>
+                </li>
+
+
+                <li><a href="{% url "AdminPanel:my_course" %}"><i class="fas fa-address-card"></i>دوره های من</a>
+                </li>
+
+
+                <li><a href="{% url "AdminPanel:MyDocuments" %}"><i class="fas fa-address-card"></i>مدارک من</a>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+</div>
