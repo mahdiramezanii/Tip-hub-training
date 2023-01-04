@@ -1,27 +1,75 @@
 class Stack:
     
+    item=[]
     maxsize=100
-    items=[]
-    
     
     def is_full(self):
         
-        if len(self.items) == 0:
+        if (len(self.item) == (self.maxsize)):
             
             return 1
-        
-        return 0
+        else:
+            return 0
     
-    def show(self):
+    
+    def is_empty(self):
         
-        if self.is_full():
-            print("full")
+        if len(self.item) == 0:
             
+            return 1
         else:
             
-            for item in range(len(self.items)-1,-1,-1):
-                print(self.items[item])
+            return 0
+            
+    def push(self,x):
+        
+        if self.is_full():
+            
+            return None
+        else:
+            
+            self.item.append(x)
+            
+    def show(self):
+        
+        if self.is_empty():
+            
+            return "stack in empty!!!!!"
+        
+        else:
+        
+            for item in range(len(self.item)-1,-1,-1):
+            
+                print(self.item[item])
     
+    def peak(self):
+        
+        if self.is_empty():
+            
+            return "stack is empty!!!!1"
+        
+        else:
+        
+        
+            return self.item[-1]
+    
+    def delete(self):
+        
+        
+        if self.is_empty():
+            
+            return "stack is empty!!!!1"
+        
+        else:
+            
+            self.item.pop()
+            
+
 s1=Stack()
+
+s1.push(55)
+s1.push(45)
+s1.push(75)
+s1.push("mahdi")
 
 s1.show()
